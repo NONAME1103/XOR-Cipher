@@ -31,7 +31,7 @@ class MainClass {
       // ascii code after being compared with the key
       string encryptedBin = "";
       // Calls method to convert the ascii code to binary
-      string bin = Convert.ToString(ToBin(Convert.ToInt32(ascii), 1));
+      string bin = Convert.ToString(ToBin(Convert.ToInt32(ascii)));
       // Ensures that the number is an 8 bit binary number
       if (bin.Length < 8) {
         List<char> chars = new List<char> (bin.ToCharArray());
@@ -53,7 +53,7 @@ class MainClass {
         }
       }
       // Takes the ascii code (denary) version of the new number
-      int newAscii = ToDen(Convert.ToInt32(encryptedBin), 1);
+      int newAscii = ToDen(Convert.ToInt32(encryptedBin));
       // Converts the ascii code into a char
       char c = (char) newAscii;
       // Adds the now encrypted char to the output string
@@ -62,7 +62,7 @@ class MainClass {
     return encrypted;
   }
   // Uses recursion to convert denary numbers to binary
-  public static int ToBin (int num, int den) {
+  public static int ToBin (int num, int den = 1) {
     if (num / 2 > 0) {
       int y = (num % 2) * den;
       return (y + ToBin(num/2, den*10));
@@ -72,7 +72,7 @@ class MainClass {
     }
   }
   // Uses recursion to convert binary numbers to denary
-  public static int ToDen (int num, int bin) {
+  public static int ToDen (int num, int bin = 1) {
     if (num / 10 > 0) {
       int y = (num % 10) * bin;
       return (y + ToDen(num/10, bin*2));
