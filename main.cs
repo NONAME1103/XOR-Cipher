@@ -4,15 +4,16 @@ using System.Collections.Generic;
 
 class MainClass {
   public static void Main (string[] args) {
-    // Defines the key that will be used (can be changed here to change the cipher)
-    string key = "01001110";
+    Write ("\nDefault Key: \"01001110\"\nEnter desired encryption key or press 'Enter' to use default: ");
+    string key = ReadLine();
+    key = ValidateKey(key);
     Write("\n\nEnter the message to encrypt: ");
     string message = ReadLine();
     // Calls encryption method
     string encrypted = XOREncrypt(message, key);
     WriteLine("\nEncrypted message: {0}\n\n", encrypted);
   }
-
+  // Encryption method with default key if none is given
   public static string XOREncrypt (string message, string key) {
     // States the current key being used (for informational purposes)
     WriteLine("\nXOR Key: {0}", key);
@@ -60,6 +61,24 @@ class MainClass {
       encrypted += c;
     }
     return encrypted;
+  }
+  public static string ValidateKey(string key) {
+    // If the key is not the right length, use the defualt
+    if (key.Length != 8) {
+      // If the user didn't simply press 'Enter' as in the prompt...
+      if (key.Length != 0) {
+        WriteLine ("\n\nInvalid key!\n\nUsing default key (01001110)...");
+      }
+      return "01001110";
+    }
+    foreach (char c in key) {
+      // If the key has any non-binary values...
+      if (!((c == '0') || (c == '1'))) {
+        WriteLine ("\n\nInvalid key!\n\nUsing default key (01001110)...");
+        return "01001110";
+      }
+    }
+    return key;
   }
   // Uses recursion to convert denary numbers to binary
   public static int ToBin (int num, int den = 1) {
