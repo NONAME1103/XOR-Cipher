@@ -5,12 +5,12 @@ using System.Collections.Generic;
 class MainClass {
   public static void Main (string[] args) {
     // Defines the key that will be used (can be changed here to change the cipher)
-    string key = "10100111";
+    string key = "01001110";
     Write("\n\nEnter the message to encrypt: ");
     string message = ReadLine();
     // Calls encryption method
     string encrypted = XOREncrypt(message, key);
-    WriteLine("\nEncrypted message: {0}", encrypted);
+    WriteLine("\nEncrypted message: {0}\n\n", encrypted);
   }
 
   public static string XOREncrypt (string message, string key) {
